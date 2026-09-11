@@ -9,7 +9,7 @@ Understanding classical ciphers builds intuition for modern encryption. This too
 ## Features
 
 - **Caesar Cipher** — Encrypt and decrypt text using a shift-based substitution cipher
-- **Vigenère Cipher** — Encrypt and decrypt text using a keyword-based polyalphabetic cipher (stronger than Caesar)
+- **Vigenere Cipher** — Encrypt and decrypt text using a keyword-based polyalphabetic cipher (stronger than Caesar)
 - **Caesar Cipher Cracker** — Breaks Caesar-encrypted text *without knowing the key*, using chi-squared statistical frequency analysis against standard English letter frequencies
 - **Unified CLI Menu** — Single entry point (`main.py`) to access all features
 
@@ -19,7 +19,7 @@ Understanding classical ciphers builds intuition for modern encryption. This too
 
 Each letter is shifted by a fixed number of positions in the alphabet (the "key"). For example, with shift 3: A → D, B → E, etc.
 
-### Vigenère Cipher
+### Vigenere Cipher
 
 Uses a repeating keyword where each letter of the keyword determines a different shift value for the corresponding letter of the plaintext — making it significantly harder to break than Caesar with simple frequency analysis.
 
@@ -36,9 +36,13 @@ English text has a predictable letter-frequency distribution (E, T, A, O, I, N..
 
 cipher-toolkit/
 ├── caesar.py # Caesar cipher encrypt/decrypt
+
 ├── vigenere.py # Vigenère cipher encrypt/decrypt
+
 ├── frequency_analysis.py # Chi-squared based Caesar cracker
+
 ├── main.py # CLI menu — unified entry point
+
 └── README.md
 
 
@@ -53,25 +57,41 @@ python main.py
 
 
 3. Choose an option from the menu:
+   
 1.Caesar Encrypt
+
 2.Caesar Decrypt
-3.Vigenère Encrypt
-4.Vigenère Decrypt
+
+3.Vigenere Encrypt
+
+4.Vigenere Decrypt
+
 5.Crack Caesar (Frequency Analysis)
+
 6.Exit
+
 
 
 ## Example
 
 Choose an option (1-6): 1
+
 Enter text: Attack at dawn
+
 Random Shift Value: 7
+
 Encrypted: Haaphr ha khcu
 
+
+
 Choose an option (1-6): 5
+
 Enter encrypted text to crack: Haaphr ha khcu
+
 Guessed Shift: 7
+
 Decrypted Text: Attack at dawn 
+
 
 
 ## What This Project Demonstrates
