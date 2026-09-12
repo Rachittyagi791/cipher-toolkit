@@ -2,6 +2,7 @@ import random
 from caesar import caesar_encrypt, caesar_decrypt
 from vigenere import vigenere_encrypt, vigenere_decrypt
 from frequency_analysis import crack_caesar
+from vigenere_crack import crack_vigenere
 
 
 def menu():
@@ -11,16 +12,15 @@ def menu():
     print("3. Vigenère Encrypt")
     print("4. Vigenère Decrypt")
     print("5. Crack Caesar (Frequency Analysis)")
-    print("6. Exit")
+    print("6. Crack Vigenère (Kasiski Examination)")
+    print("7. Exit")
 
 
 def main():
     while True:
         menu()
-        choice = input("Choose an option (1-6): ")
+        choice = input("Choose an option (1-7): ")
 
-
-    
         if choice == "1":
             text = input("Enter text: ")
             shift = random.randint(1, 25)
@@ -49,6 +49,12 @@ def main():
             print(f"Decrypted Text: {decrypted}")
 
         elif choice == "6":
+            text = input("Enter Vigenère-encrypted text to crack: ")
+            key, decrypted = crack_vigenere(text)
+            print(f"Guessed Key: {key}")
+            print(f"Decrypted Text: {decrypted}")
+
+        elif choice == "7":
             print("Bye!")
             break
 

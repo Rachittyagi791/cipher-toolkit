@@ -39,5 +39,4 @@ if __name__ == "__main__":
         encrypted = vigenere_encrypt(message, key)
         print("Encrypted:", encrypted)
 
-        decrypted = vigenere_decrypt(encrypted, key)
-        print("Decrypted:", decrypted)
+        
