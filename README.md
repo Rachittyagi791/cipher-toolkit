@@ -6,7 +6,6 @@ A Python-based command-line tool implementing classical cryptographic ciphers â€
 
 Understanding classical ciphers builds intuition for modern encryption. This tool demonstrates both encrypting/decrypting text and breaking ciphers without knowing the key, combining programming skills with analytical/statistical thinking â€” core skills for cryptography and security roles.
 
-## Features
 
 ## Features
 
