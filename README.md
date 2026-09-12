@@ -8,9 +8,12 @@ Understanding classical ciphers builds intuition for modern encryption. This too
 
 ## Features
 
+## Features
+
 - **Caesar Cipher** — Encrypt and decrypt text using a shift-based substitution cipher
-- **Vigenere Cipher** — Encrypt and decrypt text using a keyword-based polyalphabetic cipher (stronger than Caesar)
+- **Vigenère Cipher** — Encrypt and decrypt text using a keyword-based polyalphabetic cipher (stronger than Caesar)
 - **Caesar Cipher Cracker** — Breaks Caesar-encrypted text *without knowing the key*, using chi-squared statistical frequency analysis against standard English letter frequencies
+- **Vigenère Cipher Cracker** — Breaks Vigenère-encrypted text *without knowing the keyword*, using Kasiski Examination to detect key length followed by per-column frequency analysis
 - **Unified CLI Menu** — Single entry point (`main.py`) to access all features
 
 ## How It Works
@@ -27,6 +30,14 @@ Uses a repeating keyword where each letter of the keyword determines a different
 
 English text has a predictable letter-frequency distribution (E, T, A, O, I, N... being most common). The cracker tries all 26 possible shifts, scores each resulting decryption using a chi-squared statistic against expected English letter frequencies, and returns the shift with the best statistical match — no key required.
 
+### Vigenere Cracking (Kasiski Examination)
+1. Repeated 3-letter sequences are located in the ciphertext.
+2. The distances between repeat occurrences are calculated, and their GCD (Greatest Common Divisor) gives the most likely key length.
+3. The ciphertext is split into columns based on the guessed key length — each column behaves like an independent Caesar cipher.
+4. Chi-squared frequency analysis is applied to each column to recover each letter of the key.
+
+**Limitation:** This technique relies on statistical patterns and works reliably on longer ciphertexts (50+ words). Short text may not contain enough repeated sequences for accurate key-length detection.
+
 ## Tech Stack
 
 - Python 3
@@ -35,15 +46,19 @@ English text has a predictable letter-frequency distribution (E, T, A, O, I, N..
 ## Project Structure
 
 cipher-toolkit/
-├── caesar.py # Caesar cipher encrypt/decrypt
 
-├── vigenere.py # Vigenère cipher encrypt/decrypt
+├── caesar.py              # Caesar cipher encrypt/decrypt
 
-├── frequency_analysis.py # Chi-squared based Caesar cracker
+├── vigenere.py             # Vigenère cipher encrypt/decrypt
 
-├── main.py # CLI menu — unified entry point
+├── frequency_analysis.py   # Chi-squared based Caesar cracker
+
+├── vigenere_crack.py       # Kasiski Examination based Vigenère cracker
+
+├── main.py                 # CLI menu — unified entry point
 
 └── README.md
+
 
 
 ## How to Run
@@ -92,6 +107,16 @@ Guessed Shift: 7
 
 Decrypted Text: Attack at dawn 
 
+```
+Choose an option (1-7): 6
+
+Enter Vigenère-encrypted text to crack: [long ciphertext here]
+
+Guessed Key: SECURITY
+
+Decrypted Text: [recovered plaintext]
+
+```
 
 
 ## What This Project Demonstrates
@@ -101,10 +126,11 @@ Decrypted Text: Attack at dawn
 - Clean, modular Python code (separated into reusable modules)
 - Understanding of why modern encryption (AES, RSA) replaced classical ciphers — resistance to statistical attacks
 
+
 ## Future Improvements
 
-- Vigenère cipher cracking using Kasiski Examination (key-length detection)
 - Web-based UI using Flask/Streamlit
+- Index of Coincidence method to improve Vigenère key-length detection accuracy on shorter texts
 
 ## Author
 
